@@ -28,10 +28,11 @@ function newEmployee() {
       {
         type: "input",
         name: "id",
-        message: "What is the id of the employee?",
-      },
+        message: "What is the id of the employee?"
+      }
     ])
-    .then(({ position, email, id, name }) => {
+    .then(({ position, name, id, email }) => {
+        console.log(employees)
       switch (position) {
         case "Manager":
           // ask about office number
@@ -44,16 +45,38 @@ function newEmployee() {
               },
             ])
             .then(({ officeNumber }) => {
-              employees.push(new Manager(name, id, email, officeNumber))
-
-              another()
+              employees.push(new Manager(name, id, email, officeNumber));
+              another();
+            });
+          break;
+        case "Engineer":
+          inquirer
+            .prompt([
+              {
+                type: "input",
+                name: "github",
+                message: "What is the engineers github username?",
+              },
+            ])
+            .then(({ github }) => {
+              employees.push(new Engineer(name, id, email, github));
+              another();
             });
           break;
         case "Intern":
-          // ask about school
-          break;
-        case "Eningeer":
           // ask about github
+          inquirer
+            .prompt([
+              {
+                type: "input",
+                name: "school",
+                message: "What school does the intern attend?",
+              },
+            ])
+            .then(({ school }) => {
+              employees.push(new Intern(name, id, email, school));
+              another();
+            });
           break;
         default:
         // Uh Oh
@@ -66,8 +89,8 @@ function another() {
       {
         type: "confirm",
         name: "more",
-        message: "Would you like to create another employee?",
-      },
+        message: "Would you like to create another employee?"
+      }
     ])
     .then(({ more }) => {
       if (more) newEmployee();
