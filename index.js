@@ -12,8 +12,9 @@ function newEmployee() {
     .prompt([
       {
         type: "list",
-        name: "What position is this employee?",
-        choices: ["Manager", "Intern", "Engineer"],
+        name: "position",
+        message: "What position is this employee?",
+        choices: ["Manager", "Engineer", "Intern"],
       },
       {
         type: "input",
@@ -28,11 +29,11 @@ function newEmployee() {
       {
         type: "input",
         name: "id",
-        message: "What is the id of the employee?"
-      }
+        message: "What is the id of the employee?",
+      },
     ])
     .then(({ position, name, id, email }) => {
-        console.log(employees)
+      console.log(position);
       switch (position) {
         case "Manager":
           // ask about office number
@@ -89,8 +90,8 @@ function another() {
       {
         type: "confirm",
         name: "more",
-        message: "Would you like to create another employee?"
-      }
+        message: "Would you like to create another employee?",
+      },
     ])
     .then(({ more }) => {
       if (more) newEmployee();
@@ -102,16 +103,7 @@ function renderHTMLFile() {
     "./index.html",
     /*html*/ `
         <ul>
-            ${employees.map(
-              (employee) => /*html*/ `
-                <li>
-                    <div>
-                    <h1>${employee.getName()}</h1>
-                    <a href="mailto:${employee.getEmail()}">${employee.getEmail()}</a>
-                    <p>${employee.getId()}</p>
-                    <a href="https://www.github.com/${employee.getGithub()}">${employee.getGithub()}</a>
-            `
-            )}
+            ${employees.map((employee) => employee.makeHTML())}
         </ul>
     `
   );
