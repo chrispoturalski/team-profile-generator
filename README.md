@@ -6,7 +6,7 @@ No licenses were used in this project
 
 In this project, we were tasked with writing an inquirer app to gather information about team members and generate the HTML file using fs. By creating this application, it will be much quicker to add new members of a growing team.
 
-![Image 1](No)
+![Deployed Picture](./ProjectPhoto.png)
 
 Here is the deployed link to the project: There is no deployed link for this project.
 
